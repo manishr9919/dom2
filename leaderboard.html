@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compare MIn And MAx</title>
+    <style>
+        #parent{
+            margin: auto;
+            text-align: center;
+        }
+         #parent > .FstChild{
+            width: 500px;
+            margin: auto;
+            /* border: 2px solid red; */
+            display:flex;
+            justify-content: space-around;
+        }
+        #parent > .FstChild > div h2{
+            padding: 30px;
+            width: 150px;
+            border-radius: 10px;
+        }
+        #parent > .FstChild > div:first-child>h2{
+            background-color: red;
+        }
+        #parent > .FstChild > div:last-child>h2{
+            background-color: green;
+        }
+        #parent>.SndChild>div.score{
+            /* background-color: yellow; */
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            padding: 7px;
+            width: 250px;
+            text-align: center;
+            margin: auto;
+            margin-top: 10px;
+        }
+        #parent>.SndChild>div:last-child{
+            background-color: transparent;
+            /* padding: 10px; */
+            width: 200px;
+            text-align: center;
+            margin: auto;
+            margin-top: 20px;
+            /* border: 2px solid red; */
+        }
+        #parent>.SndChild>div:last-child>button{
+            width: 100%;
+            padding: 10px;
+        }
+        .buttons{
+            display: grid;
+            width: 400px;
+            padding-top: 20px;
+            margin: auto;
+            grid-template-columns: repeat(3,3fr);
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .buttons button{
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="parent">
+        <div class="FstChild">
+            <div>
+                <h1>MIN</h1>
+                <h2 id="min">100</h2>
+            </div>
+            <div>
+                <h1>MAX</h1>
+                <h2 id="max">200</h2>
+            </div>
+        </div>
+        <div class="SndChild">
+            <h2>SCORE</h2>
+            <div class="score">
+                <h1 id="dScore">#</h1>
+            </div>
+            <div class="buttons">
+                <button>1</button>
+                <button>2</button>
+                <button>3</button>
+                <button>4</button>
+                <button>5</button>
+                <button>6</button>
+                <button>7</button>
+                <button>8</button>
+                <button>9</button>
+                <button>0</button>
+            </div>
+            <div>
+                <button onclick="enter()">Enter</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    let min = document.getElementById("min");
+    let max = document.getElementById("max");
+    let Display = document.getElementById("dScore");
+    let buttons = document.querySelectorAll('.buttons > button');
+    let currentValue = "";
+    for(let i=0; i<buttons.length; i++){
+        buttons[i].addEventListener('click',function(){
+            currentValue += buttons[i].innerText;
+           Display.innerText= currentValue
+        //    alert(currentValue)
+        });
+        
+    }
+   
+    function enter(){
+        console.log(currentValue,min.innerText,max.innerText)
+        if(+currentValue < +min.innerText){
+            min.innerText=currentValue;
+            currentValue=""
+        }
+        else if(+currentValue > +max.innerText){
+            max.innerText=currentValue;
+            currentValue=""
+        }
+        else{
+            currentValue=""
+            Display.innerText="#"
+        }
+        Display.innerHTML="#";
+
+    }
+</script>
